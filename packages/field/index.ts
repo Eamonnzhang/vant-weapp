@@ -94,7 +94,6 @@ VantComponent({
 
     onBlur(event: Weapp.Event) {
       const { value = '', cursor = 0 } = event.detail || {};
-      this.$emit('blur', { value, cursor });
       this.focused = false;
       const showClear = this.getShowClear();
 
@@ -110,6 +109,10 @@ VantComponent({
         }, () => {
           this.emitChange(value);
         });
+      }
+
+      if (!this.blurFromClear) {
+        this.$emit('blur', { value, cursor });
       }
     },
 
